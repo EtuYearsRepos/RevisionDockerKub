@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql-secret
+  labels:
+    app: monsuperdrive
+type: Opaque
+stringData:
+  password: password

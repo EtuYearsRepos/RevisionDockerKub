@@ -1,0 +1,2 @@
+kubectl scale deployment <DEPLOYMENT NAME> --replicas=<#PODS>
+kubectl scale deployment student-app --replicas=2

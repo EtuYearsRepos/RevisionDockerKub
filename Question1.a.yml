@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monsuperdrive-deployment
+  labels:
+    app: monsuperdrive
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monsuperdrive
+  template:
+    metadata:
+      labels:
+        app: monsuperdrive 
+    spec:
+      containers:
+      - name: monsuperdrive
+        image: registry.gitlab.com/jojo73/monsuperdrive/tiers2:1.0.0
+        env:
+            - name: dtb_password
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+        ports:
+        - containerPort: 9000
