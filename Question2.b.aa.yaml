@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: monsuperdrive
+    role: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monsuperdrive
+      role: db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: monsuperdrive
+        role: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:12.1
+        env:
+          - name: POSTGRES_USER
+            value: "user"
+          - name: POSTGRES_DB
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: password
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+          - name: postgres-data
+            mountPath: "/var/lib/postgresql/data"
+          - name: init-base
+            mountPath: "/docker-entrypoint-initdb.d/"
+            readOnly: true
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-monsuperdrive-pvc
+        - name: init-base
+          configMap:
+            name: init-db

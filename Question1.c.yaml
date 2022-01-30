@@ -19,11 +19,11 @@ spec:
         image: registry.gitlab.com/jojo73/monsuperdrive/tiers2:1.0.0
         resources: 
           requests:
-            memory: "500Mo"
-            cpu: "0.3m"
+            memory: "500M"
+            cpu: "300m"
           limits:
-            memory: "750Mo"
-            cpu: "0.5m"
+            memory: "750M"
+            cpu: "500m"
         env:
             - name: dtb_password
               valueFrom:

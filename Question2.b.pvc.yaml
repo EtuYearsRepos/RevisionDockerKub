@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-monsuperdrive-pvc
+  labels:
+    app: monsuperdrive
+    role: db
+spec:
+  resources:
+    requests:
+      storage: 100G
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

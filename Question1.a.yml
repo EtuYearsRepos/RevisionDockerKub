@@ -17,11 +17,7 @@ spec:
       containers:
       - name: monsuperdrive
         image: registry.gitlab.com/jojo73/monsuperdrive/tiers2:1.0.0
-        env:
-            - name: dtb_password
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
         ports:
         - containerPort: 9000
+
+# le protocole tcp se fait sur le service
